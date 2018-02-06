@@ -8,9 +8,16 @@ public class MethodArrays2 {
 	
 	}
 	
-	public static String[ ] merge (String[] list1, String[] list2) {
-		//Precondition: Two arrays are sorted
-		
+	public static String[] merge (String[] list1, String[] list2) {
+		int diff = list1.length - list2.length;
+		String[] newArr = {};
+		for(int i = 0; i < list1.length + diff; i++) {
+			for(int j = i; j < list2.length + diff; j++) {
+				if(list1[i] < list2[j]) {
+					newArr += list1[i];
+				}
+			}
+		}
 	}
 	
 	//public static int partition (int[] list) {
