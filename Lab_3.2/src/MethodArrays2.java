@@ -33,7 +33,13 @@ public class MethodArrays2 {
 		return newArr;
 	}
 	
-	//public static int partition (int[] list) {
+	public static int partition (int[] list) {
+		int pIndex = 0, checkIndex = list.length;
+		while(pIndex != checkIndex) {
+			if(list[pIndex])
+		}
 		
-	//}
+		return pIndex;
+	
+	}
 }
