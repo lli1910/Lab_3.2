@@ -5,10 +5,16 @@
 public class MethodArrays2 {
 	public static void main (String args[]) {
 		String[] list1 = {"Alpha","Charlie","Echo"}, list2 = {"Beta","Delta"};
-		
+		int[] partList = {3,2,6,5,1,4}; 
 		for(String s: merge(list1,list2)) {
 			System.out.println(s);
 		}
+		
+		partition(partList);
+		for(int a: partList) {
+			System.out.println(a); //should return 
+		}
+		
 		System.out.println("YOO");
 		
 	}
@@ -36,10 +42,17 @@ public class MethodArrays2 {
 	public static int partition (int[] list) {
 		int pIndex = 0, checkIndex = list.length;
 		while(pIndex != checkIndex) {
-			if(list[pIndex])
+			if(list[pIndex]>list[checkIndex]) {
+				intSwap(list, pIndex, checkIndex);
+				checkIndex++;
+			} 
 		}
-		
 		return pIndex;
+	}
 	
+	public static void intSwap(int[]arr, int index1, int index2) {
+		int num = arr[index1];
+		arr[index1]=arr[index2];
+		arr[index2]=num;
 	}
 }
