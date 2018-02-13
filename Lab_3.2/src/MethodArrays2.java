@@ -1,27 +1,41 @@
+import java.util.Arrays;
+
 //Lily Li
 //Period 2
 //2/15/18
 //Merge & Partition Sorts
 public class MethodArrays2 {
 	public static void main (String args[]) {
-		String[] list1 = {"Alpha","Charlie","Echo"}, list2 = {"Beta","Delta"};
-		int[] partList = {3,2,6,5,1,4}; 
-		for(String s: merge(list1,list2)) {
-			System.out.println(s);
-		}
+		//Testing arrays
+		String [] test1 = {"apple", "cucumber", "microsoft", "zorro"};
+		String [] test2 = {"banana", "cherry", "mahogany", "oreos", "pinata"};
+		int[] test3 = {3,4,2,7,12,22,0,1};
 		
-		partition(partList);
-		for(int a: partList) {
-			System.out.println(a); //should return 
-		}
+		//Merge Test
+		long start = System.nanoTime();
+		String[] mergeResult = merge(test1,test2);
+		long end = System.nanoTime();
+		long time = end - start;
+		System.out.println("Merge test took: "+ time + "nanoseconds");
+		System.out.println(Arrays.toString(mergeResult)); 
+		//Should print the array with all words in alpha order.
 		
-		System.out.println("YOO");
-		
+		//Partition test
+		start = System.nanoTime();
+		int pivotFinalPos = partition(test3);
+		end = System.nanoTime();
+		time = end - start;
+		System.out.println("Partition test took: " + time + " nanoseconds");
+		System.out.println("Final Pivot Position: " + pivotFinalPos);
+		System.out.println(Arrays.toString(test3));
 	}
+	
 	
 	public static String[] merge (String[] list1, String[] list2) {
 		int diff = list1.length - list2.length, newIndex = 0;
 		String[] newArr = {};
+		
+		//use while loop
 		for(int i = 0; i < list1.length + diff; i++) {
 			for(int j = i; j < list2.length+diff; j++) {
 				if(list1[i].compareTo(list2[j])>0) {
@@ -33,6 +47,7 @@ public class MethodArrays2 {
 				else if(list2[j].compareTo(list1[i])>0) {
 					newArr[newIndex] = list2[j];
 					newIndex++;
+					j++;
 				}
 			}
 		}
