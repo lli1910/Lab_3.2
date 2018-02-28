@@ -11,15 +11,19 @@ public class MethodArrays2 {
 		String [] test2 = {"banana", "cherry", "mahogany", "oreos", "pinata"};
 		int[] test3 = {3,4,2,7,12,22,0,1};
 		
+		String[] mergeResult = merge(test1,test2);
+		System.out.println(Arrays.toString(mergeResult)); 
+		
+		System.out.print("banananananandada");
 		//Merge Test
-		long start = System.nanoTime();
+	/*	long start = System.nanoTime();
 		String[] mergeResult = merge(test1,test2);
 		long end = System.nanoTime();
 		long time = end - start;
 		System.out.println("Merge test took: "+ time + "nanoseconds");
 		System.out.println(Arrays.toString(mergeResult)); 
 		//Should print the array with all words in alpha order.
-		
+	
 		//Partition test
 		start = System.nanoTime();
 		int pivotFinalPos = partition(test3);
@@ -28,31 +32,38 @@ public class MethodArrays2 {
 		System.out.println("Partition test took: " + time + " nanoseconds");
 		System.out.println("Final Pivot Position: " + pivotFinalPos);
 		System.out.println(Arrays.toString(test3));
+		
+	*/	
 	}
 	
 	
 	public static String[] merge (String[] list1, String[] list2) {
-		int diff = list1.length - list2.length, newIndex = 0;
-		String[] newArr = {};
+		int newIndex = 0,left = 0,right = 0;
+		String[] newArr = new String[list1.length + list2.length];
+		int remaining = Math.abs(list1.length-list2.length);
 		
-		//use while loop
-		for(int i = 0; i < list1.length + diff; i++) {
-			for(int j = i; j < list2.length+diff; j++) {
-				if(list1[i].compareTo(list2[j])>0) {
-					newArr[newIndex] = list1[i];
-					newIndex++;
-					i++;
-					j--;
-				}
-				else if(list2[j].compareTo(list1[i])>0) {
-					newArr[newIndex] = list2[j];
-					newIndex++;
-					j++;
-				}
+		while(newIndex < newArr.length && left<list1.length - remaining && right< list2.length - remaining)  { //whichever is less, say left is less, then left< list1.length and right is list2.length -remaining.
+			if(list1[left].compareTo(list2[right])<0) {
+				newArr[newIndex] = list1[left];
+				newIndex++;
+				left++;
+			}
+			else if(list2[right].compareTo(list1[left])<0) {
+				newArr[newIndex] = list2[right];
+				newIndex++;
+				right++;
+			}
+		}	
+		
+		if(remaining>0) {
+			for(int i = left + 1; i<remaining; i++) {
+				newArr[newIndex] = list1[i];
+				newIndex++;
 			}
 		}
-		return newArr;
+		return newArr;		
 	}
+	
 	
 	public static int partition (int[] list) {
 		int pIndex = 0, checkIndex = list.length;
